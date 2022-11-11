@@ -1,0 +1,11 @@
+{:deps  {cprop/cprop {:mvn/version "0.1.19"}}
+ :tasks {:requires            ([babashka.fs :as fs]
+                               [babashka.curl :as curl]
+                               [cprop.source :refer [from-env]]
+                               [clojure.java.shell]
+                               [clojure.string :as str]
+                               [clojure.java.io :as io])
+
+         repl                 {:doc     "Run MEGA Repl"
+                               :depends []
+                               :task    (clojure "-M::test:nrepl:refactor")}}}

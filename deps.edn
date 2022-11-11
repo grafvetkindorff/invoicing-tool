@@ -1,0 +1,43 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure
+        {:mvn/version "1.10.3"}
+        com.intuit.quickbooks-online/ipp-v3-java-data
+        {:mvn/version "6.2.3"}
+        com.intuit.quickbooks-online/payments-api
+        {:mvn/version "6.2.3"}
+        com.intuit.quickbooks-online/oauth2-platform-api
+        {:mvn/version "6.2.3"}
+        com.intuit.quickbooks-online/ipp-v3-java-devkit
+        {:mvn/version "6.2.3"}
+        com.intuit.quickbooks-online/ipp-java-qbapihelper
+        {:mvn/version "5.0.5"}}
+
+ :aliases
+ {:nrepl {:extra-paths []
+          :extra-deps  {refactor-nrepl/refactor-nrepl {:mvn/version "3.6.0"}
+                        cider/cider-nrepl             {:mvn/version "0.28.7"}
+                        cider/piggieback              {:mvn/version "0.5.3"}
+                        zprint/zprint                 {:mvn/version "1.2.4"}
+                        hashp/hashp                   {:mvn/version "0.2.2"}
+                        re-frisk/re-frisk             {:mvn/version "1.6.0"}
+                        binaryage/devtools            {:mvn/version "1.0.6"}}
+
+          :main-opts   ["-m" "nrepl.cmdline"
+                        "-b" "0.0.0.0"
+                        "--middleware"
+                        "[refactor-nrepl.middleware/wrap-refactor,cider.nrepl/cider-middleware]"]
+
+          :jvm-opts    ^:replace ["-XX:-OmitStackTraceInFastThrow"
+                                  "-XX:+UnlockDiagnosticVMOptions"
+                                  "-XX:+DebugNonSafepoints"
+                                  ;; Limit JVM heap (for OOM testing)
+                                  ;; "-Xmx1g" "-Xms1g"
+                                  "-Djdk.attach.allowAttachSelf"]}
+  :test {:extra-paths ["test"]
+         :extra-deps {clj-http-fake/clj-http-fake               {:mvn/version "1.0.3"}
+                      lambdaisland/kaocha                       {:mvn/version "1.71.1119"}
+                      com.clojure-goes-fast/clj-java-decompiler {:mvn/version "0.3.2"}
+                      criterium/criterium                       {:mvn/version "0.4.6"}
+                      com.clojure-goes-fast/clj-async-profiler  {:mvn/version "1.0.1"}}}
+  :refactor
+  {:extra-deps {rewrite-clj/rewrite-clj {:mvn/version "1.1.45"}}}}}
