@@ -22,7 +22,7 @@
         propFileName (io/resource "config.properties")
         inputStream (io/input-stream propFileName)
         _ (doto prop
-            (.load  inputStream))]
+            (.load inputStream))]
     prop))
 
 (defn get-context
@@ -30,8 +30,8 @@
   (let [bearer-token "oauth2.accessToken"
         prop (load-properties)
         oauth (OAuth2Authorizer. (.getProperty prop bearer-token))
-        company-id (.getProperty prop "company-id")]
-    (Context. oauth (ServiceType/QBO) company-id)) )
+        company-id (.getProperty prop "company.id")]
+    (Context. oauth ServiceType/QBO company-id)) )
 
 ;; String sql = "select * from account";
 ;; QueryResult queryResult = service.executeQuery(sql);
@@ -43,13 +43,17 @@
 (defn do-sql-query
   [sql]
   (let [service (DataService. (get-context))]
-    (.executeQuery service sql)))
+    (try
+      (.executeQuery service sql)
+      (catch FMSException e
+        (map #(.getMessage %) (.getErrorList e))))))
 
-;; (do-sql-query "select * from companyinfo")
+(map bean (.getEntities (do-sql-query "select * from payment")))
 
-;; REST
 
 (defn get-bill-payment
   []
   (let [service (DataService. (get-context))]
     (.findAll service (Bill.))))
+
+#_(get-bill-payment)
