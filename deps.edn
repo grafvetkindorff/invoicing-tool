@@ -10,7 +10,9 @@
         com.intuit.quickbooks-online/ipp-v3-java-devkit
         {:mvn/version "6.2.3"}
         com.intuit.quickbooks-online/ipp-java-qbapihelper
-        {:mvn/version "5.0.5"}}
+        {:mvn/version "5.0.5"}
+        org.apache.tika/tika-app
+        {:mvn/version "2.6.0"}}
 
  :aliases
  {:nrepl {:extra-paths []

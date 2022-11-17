@@ -1,9 +1,12 @@
 (ns samurai.oauth
-  (:require [clojure.java.io :as io])
+  (:require [clojure.java.io :as io]
+            [clojure.string :as str])
   (:import java.io.FileNotFoundException
            java.io.IOException
            java.io.InputStream
+           java.io.File
            java.util.Properties
+           org.apache.tika.Tika
            com.intuit.ipp.core.Context
            com.intuit.ipp.core.ServiceType
            com.intuit.ipp.exception.FMSException
@@ -48,7 +51,7 @@
       (catch FMSException e
         (map #(.getMessage %) (.getErrorList e))))))
 
-(map bean (.getEntities (do-sql-query "select * from payment")))
+#_(map bean (.getEntities (do-sql-query "select * from payment")))
 
 
 (defn get-bill-payment
@@ -57,3 +60,18 @@
     (.findAll service (Bill.))))
 
 #_(get-bill-payment)
+
+
+(def github-re-pattern #"Total .*")
+
+(defn parse-invoice-file
+  [path pattern]
+  (let [invoice-file (File. path)
+        parsed (str/split (.parseToString (Tika.) invoice-file) #"\n\n")]
+   (filter some? (map #(re-matches pattern %) parsed))))
+
+
+(comment
+  (parse-invoice-file (str (System/getenv "HOME") "/tmp/github-invoice.pdf") github-re-pattern)
+
+  )
