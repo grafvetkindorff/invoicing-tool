@@ -1,5 +1,6 @@
 (ns samurai.common
-  (:require [clojure.java.io :as io]))
+  (:require [clojure.java.io :as io])
+  (:import java.util.Properties))
 
 
 (defn load-properties

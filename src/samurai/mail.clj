@@ -1,18 +1,29 @@
 (ns samurai.mail
   (:require [clojure-mail.core :as msg-core]
             [clojure-mail.message :as msg]
-            [samurai.common :refer [load-properties]]))
+            [samurai.common :refer [load-properties]])
+  (:import java.io.File
+           java.io.FileNotFoundException
+           java.io.FileOutputStream))
 
 
-  ;; Parse email attachment
-(def email-store (let [prop (load-properties)]
+(defn make-store-from-properties
+  []
+  (let [prop (load-properties)]
                    (msg-core/store "imap.gmail.com"
                                    (.getProperty prop "email.account")
                                    (.getProperty prop "email.password"))))
 
-(def inbox-messages (msg-core/inbox email-store))
+
+(def inbox-messages (msg-core/inbox (make-store-from-properties)))
 
 (def latest (msg/read-message (first inbox-messages)))
+
+
+(defn get-messages
+  [credentials]
+  (msg-core/inbox credentials))
+
 
 (defn get-msg-attachment
   [msg]

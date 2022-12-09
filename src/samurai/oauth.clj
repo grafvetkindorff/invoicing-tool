@@ -11,12 +11,8 @@
            com.intuit.ipp.services.QueryResult
            com.intuit.ipp.util.Logger
            com.sun.mail.util.BASE64DecoderStream
-           java.io.File
-           java.io.FileNotFoundException
-           java.io.FileOutputStream
            java.io.InputStream
            java.io.IOException
-           java.util.Properties
            org.apache.tika.Tika))
 
 
