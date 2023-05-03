@@ -1,13 +1,18 @@
 {:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
-        com.intuit.quickbooks-online/ipp-v3-java-data {:mvn/version "6.2.3"}
-        com.intuit.quickbooks-online/payments-api {:mvn/version "6.2.3"}
-        com.intuit.quickbooks-online/oauth2-platform-api {:mvn/version "6.2.3"}
-        com.intuit.quickbooks-online/ipp-v3-java-devkit {:mvn/version "6.2.3"}
-        com.intuit.quickbooks-online/ipp-java-qbapihelper {:mvn/version "5.0.5"}
-        org.apache.tika/tika-app {:mvn/version "2.6.0"}
+        cprop/cprop         {:mvn/version "0.1.19"}
+        ring/ring           {:mvn/version "1.9.6"}
+        http-kit/http-kit   {:mvn/version "2.5.3"}
+        integrant/integrant {:mvn/version "0.8.0"}
+        compojure/compojure {:mvn/version "1.7.0"}
+        hiccup/hiccup       {:mvn/version "1.0.5"}
         io.forward/clojure-mail {:mvn/version "1.0.8"}
-        http-kit/http-kit {:mvn/version "2.5.3"}}
+        org.apache.tika/tika-app {:mvn/version "2.6.0"}
+        com.intuit.quickbooks-online/ipp-v3-java-data {:mvn/version "6.2.4"}
+        com.intuit.quickbooks-online/ipp-v3-java-devkit {:mvn/version "6.2.4"}
+        com.intuit.quickbooks-online/oauth2-platform-api {:mvn/version "6.2.4"}
+        com.intuit.quickbooks-online/ipp-java-qbapihelper {:mvn/version "5.0.5"}
+        com.intuit.quickbooks-online/payments-api {:mvn/version "6.2.4"}}
 
  :aliases
  {:nrepl {:extra-paths []

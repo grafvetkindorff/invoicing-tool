@@ -1,6 +1,7 @@
 (ns samurai.quickbooks-api
-  (:require [samurai.oauth :refer [get-context]])
-  (:import com.intuit.ipp.exception.FMSException))
+  (:require [samurai.oauth :refer [get-data-service]])
+  (:import [com.intuit.ipp.data Bill]
+           com.intuit.ipp.exception.FMSException))
 
 
 ;; String sql = "select * from account";
@@ -12,19 +13,24 @@
 
 (defn do-sql-query
   [sql]
-  (let [service (DataService. (get-context))]
+  (let [service (get-data-service)]
     (try
       (.executeQuery service sql)
+      ;; TODO: refresh token if expired
       (catch FMSException e
         (map #(.getMessage %) (.getErrorList e))))))
-
-;; Get amounts
-(map (comp :totalAmt bean) (.getEntities (do-sql-query "select * from payment")))
 
 
 (defn get-bill-payment
   []
-  (let [service (DataService. (get-context))]
+  (let [service (get-data-service)]
     (.findAll service (Bill.))))
 
-#_(get-bill-payment)
+
+(comment
+  (get-bill-payment)
+
+  ;; Get amounts
+  (map (comp :totalAmt bean) (.getEntities (do-sql-query "select * from payment")))
+
+  )

@@ -1,0 +1,12 @@
+{:app/config   {}
+
+ :app/db       {:config #ig/ref :app/config}
+
+ :app/server   {:config #ig/ref :app/config
+                :port 8080}
+
+ :app/qb-client {:client-id ""
+                 :client-secret ""
+                 :config #ig/ref :app/config}
+
+ :app/hello-world-printer {:interval 5000}}

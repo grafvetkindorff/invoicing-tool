@@ -1,10 +1,10 @@
 (ns samurai.parsers
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str])
+  (:import java.io.File
+           org.apache.tika.Tika))
 
 
 (def github-re-pattern #"Total .*")
-#_(def pdf-attachment-re-pattern #"APPLICATION/PDF; .*")
-
 
 (defn parse-invoice-file
   [path pattern]
