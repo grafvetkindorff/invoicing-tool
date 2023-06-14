@@ -1,18 +1,14 @@
 (ns samurai.mail
   (:require [clojure-mail.core :as msg-core]
             [clojure-mail.message :as msg]
-            [samurai.common :refer [load-properties]]
             [clojure.string :as str])
   (:import java.io.File
            java.io.FileOutputStream))
 
 
-(defn make-store-from-properties
-  []
-  (let [prop (load-properties)]
-    (msg-core/store "imap.gmail.com"
-                    (.getProperty prop "email.account")
-                    (.getProperty prop "email.password"))))
+(defn make-messages-store
+  [{:keys [protocol account password] :as _config}]
+  (msg-core/store protocol account password))
 
 
 (defn get-messages
@@ -51,7 +47,10 @@
 
 
 (comment
-  (def inbox-messages (msg-core/inbox (make-store-from-properties)))
+  (def inbox-messages (msg-core/inbox (make-messages-store {:protocol "imap.gmail.com"
+                                                            :account ""
+                                                            :password ""
+                                                            :interval 5000})))
 
   (def latest (msg/read-message (first inbox-messages)))
 

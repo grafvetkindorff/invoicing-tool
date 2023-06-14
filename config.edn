@@ -5,8 +5,14 @@
  :app/server   {:config #ig/ref :app/config
                 :port 8080}
 
- :app/qb-client {:client-id ""
-                 :client-secret ""
-                 :config #ig/ref :app/config}
+ :app/email-service {:protocol ""
+                     :account ""
+                     :password ""
+                     :interval 5000}
 
- :app/hello-world-printer {:interval 5000}}
+ :app/qb-client {:auth
+                 {:client-id ""
+                  :client-secret ""
+                  :api-host ""
+                  :redirect ""}
+                 :config #ig/ref :app/config}}

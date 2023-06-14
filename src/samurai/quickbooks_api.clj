@@ -13,12 +13,12 @@
 
 (defn do-sql-query
   [sql]
-  (let [service (get-data-service)]
-    (try
-      (.executeQuery service sql)
-      ;; TODO: refresh token if expired
-      (catch FMSException e
-        (map #(.getMessage %) (.getErrorList e))))))
+  (try
+    (-> (get-data-service)
+        (.executeQuery sql))
+    ;; TODO: refresh token if expired
+    (catch FMSException e
+      (map #(str (.getMessage %) ": " (.getDetail %)) (.getErrorList e)))))
 
 
 (defn get-bill-payment
@@ -32,5 +32,9 @@
 
   ;; Get amounts
   (map (comp :totalAmt bean) (.getEntities (do-sql-query "select * from payment")))
+
+  (def result (do-sql-query "select * from payment"))
+
+  (.size (.getEntities result))
 
   )

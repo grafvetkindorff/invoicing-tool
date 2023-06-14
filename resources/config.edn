@@ -1,9 +1,0 @@
-{:oauth {:type 2
-         :accessToken ""}
-
- :company {:id ""}
-
- :email {:account "@"
-         :password ""}
-
- ::worker {:options {:sleep 1000}}}
