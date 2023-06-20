@@ -1,6 +1,6 @@
 (ns samurai.invoicing-tool-test
   (:require [clojure.test :refer :all]
-            [samurai.invoicing-tool :as tool]
+            [invoicing-tool :as tool]
             [matcho.core :as match]))
 
 (deftest first-quickbooks-test
