@@ -21,14 +21,14 @@
   value)
 
 
-(defmethod ig/init-key :app/email-service
+(defmethod ig/init-key :app/mail-service
   [_ config]
   (let [state (atom :running)]
     {:service (future (sync-messages state config))
      :state-flag state}))
 
 
-(defmethod ig/halt-key! :app/email-service
+(defmethod ig/halt-key! :app/mail-service
   [_ {:keys [state-flag]}]
   (compare-and-set! state-flag :running :halted))
 
@@ -59,4 +59,3 @@
   "Halt the given system."
   [system]
   (ig/halt! system))
-

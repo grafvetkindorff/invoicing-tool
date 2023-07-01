@@ -14,7 +14,7 @@
                  [:script "function qb_redirect() {
                              window.location.href = \"/connectToQuickbooks\";}"]
                  [:h1 "Hello World"]
-                 [:p "This is a paragraph."]
+                 [:p "Click to authorize access to QuickBooks data:"]
                  [:button {:onclick "qb_redirect();"} "Authorize"]]])})
 
 
@@ -23,7 +23,7 @@
 (defn page-hello [_request]
   {:status 200
    :headers {"content-type" "text/plain"}
-   :body "Hi there! Keep trying!"})
+   :body "Authorize"})
 
 
 (defn page-404 [_request]

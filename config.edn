@@ -5,14 +5,14 @@
  :app/server   {:config #ig/ref :app/config
                 :port 8080}
 
- :app/email-service {:protocol ""
-                     :account ""
-                     :password ""
-                     :interval 5000}
+ :app/mail-service {:protocol "imap.gmail.com"
+                    :account ""
+                    :password ""
+                    :interval 5000}
 
  :app/qb-client {:auth
                  {:client-id ""
                   :client-secret ""
-                  :api-host ""
-                  :redirect ""}
+                  :api-host "https://sandbox-quickbooks.api.intuit.com"
+                  :redirect "http://localhost:8080/oauth2redirect"}
                  :config #ig/ref :app/config}}

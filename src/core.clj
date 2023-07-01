@@ -23,12 +23,12 @@
      ;; -- get the messages - how to sync the messages?
      ;; -- get the attachments - should we store the attachments?
 
-  ;; Service to get the invoices from the QBO
-
   ;; Compare each message to the invoices and see if there is a match
   ;; attache matched invoice to the QBO entry via API
 
   ;; How to understand that this invoice is already attached to the QBO entry?
+
+  ;; Store auth session in the database
 
   (require 'integrant)
 
